@@ -1,16 +1,86 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Premium Freelance Marketplace
 
-Currently, two official plugins are available:
+A real-time, full-stack freelance marketplace built with the **MERN** stack. This platform allows clients to post jobs and freelancers to bid on them, featuring atomic hiring transactions and instant notifications.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Real-Time Updates (Socket.io)
+- **Instant Job Feed:** New jobs appear instantly on Home and Browse pages.
+- **Live Notifications:** Freelancers are notified in real time when hired.
+- **Status Sync:** Job status badges (Active/Assigned) update across all clients immediately.
 
-## Expanding the ESLint configuration
+### Secure & Atomic Hiring (MongoDB Transactions)
+- Uses **Mongoose Sessions** for atomic hiring:
+  - Gig status updates to `assigned`.
+  - Winning bid status updates to `hired`.
+  - All other bids are marked as `rejected`.
+- If any part fails, the transaction is rolled back for data consistency.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Data Isolation & Security
+- **Strict Dashboarding:** Users only see assignments they were hired for.
+- **Owner Guardrails:** Users cannot bid on their own projects.
+- **Auth Middleware:** HttpOnly cookies & JWT for secure, stateless authentication.
+
+### Professional UI/UX
+- Responsive design with **Tailwind CSS**
+- **Lucide-React** icons for a modern look
+- Unified color logic: Blue (Active/Open), Orange (Assigned/Closed)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, Redux Toolkit, Tailwind CSS, Vite
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB (Mongoose)
+- **Real-time:** Socket.io
+- **Icons:** Lucide-React
+
+---
+
+## 📋 Installation & Setup
+
+1. **Clone the repository**
+    ```bash
+    git clone https://github.com/The-morning-star23/gigflow.git
+    cd gigflow
+    ```
+
+2. **Install Server Dependencies**
+    ```bash
+    cd backend
+    npm install
+    ```
+
+3. **Install Client Dependencies**
+    ```bash
+    cd ../frontend
+    npm install
+    ```
+
+4. **Environment Variables**
+    - Create a `.env` file in the `backend` directory.
+    - Use `.env.example` as a template if provided.
+
+5. **Run the App**
+    - **Start Server:**
+      ```bash
+      cd backend
+      npm run dev
+      ```
+    - **Start Client:**
+      ```bash
+      cd frontend
+      npm run dev
+      ```
+
+---
+
+## 🛡️ Security Best Practices
+
+- Environment variables are managed via `.env` and excluded from Git.
+- Passwords are hashed using `bcryptjs`.
+- Protected routes ensure only authenticated users can access dashboard features.
