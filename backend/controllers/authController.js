@@ -33,4 +33,21 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+const getMe = async (req, res) => {
+  try {
+    // req.user is already populated by the 'protect' middleware
+    res.status(200).json({ user: req.user });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const logout = async (req, res) => {
+  res.cookie('token', '', {
+    httpOnly: true,
+    expires: new Date(0), // Sets expiration to the past
+  });
+  res.status(200).json({ message: "Logged out successfully" });
+};
+
+module.exports = { register, login, getMe, logout };

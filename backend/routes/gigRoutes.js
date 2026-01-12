@@ -1,10 +1,11 @@
 const express = require('express');
-const { createGig, getGigs, postBid } = require('../controllers/gigController');
-const { protect } = require('../middleware/authMiddleware');
 const router = express.Router();
+const { createGig, getGigs } = require('../controllers/gigController');
+const { protect } = require('../middleware/authMiddleware');
 
-router.get('/', getGigs); // Public: anyone can see open gigs
-router.post('/', protect, createGig); // Protected: must be logged in
-router.post('/bid', protect, postBid); // Protected
+// GET /api/gigs
+router.get('/', getGigs); 
+
+router.post('/', protect, createGig); 
 
 module.exports = router;
